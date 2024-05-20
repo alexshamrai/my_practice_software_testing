@@ -1,13 +1,11 @@
 package com.practicesoftwaretesting.user.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class RegisterUserResponse {
-
+@Builder
+public class RegisterUserRequest {
     private String firstName;
     private String lastName;
     private String address;
@@ -18,6 +16,6 @@ public class RegisterUserResponse {
     private String phone;
     private String dob;
     private String email;
-    private String id;
-    private String createdAt;
+    private String password;
 }
+
