@@ -1,0 +1,27 @@
+package com.practicesoftwaretesting.user;
+
+import com.practicesoftwaretesting.common.BaseClient;
+import com.practicesoftwaretesting.user.model.LoginRequest;
+import com.practicesoftwaretesting.user.model.RegisterUserRequest;
+import io.restassured.response.Response;
+
+public class UserController extends BaseClient {
+
+    public Response registerUser(RegisterUserRequest registerUserRequest) {
+        return baseClient()
+                .body(registerUserRequest)
+                .post("/users/register");
+    }
+
+    public Response loginUser(LoginRequest loginRequest) {
+        return baseClient()
+                .body(loginRequest)
+                .post("/users/login");
+    }
+
+    public Response deleteUser(String userId, String token) {
+        return baseClient()
+                .header("Authorization", "Bearer" + token)
+                .delete("users/" + userId);
+    }
+}
