@@ -1,10 +1,10 @@
 package com.practicesoftwaretesting.cart;
 
 import com.practicesoftwaretesting.cart.model.AddCartItemRequest;
-import com.practicesoftwaretesting.common.BaseClient;
+import com.practicesoftwaretesting.common.BaseController;
 import io.restassured.response.Response;
 
-public class CartController extends BaseClient {
+public class CartController extends BaseController<CartController> {
 
     public Response createCart() {
         return baseClient()

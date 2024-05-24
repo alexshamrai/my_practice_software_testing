@@ -2,12 +2,22 @@ package com.practicesoftwaretesting;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.github.javafaker.Faker;
+import com.practicesoftwaretesting.user.UserController;
+import com.practicesoftwaretesting.user.model.LoginRequest;
+import com.practicesoftwaretesting.user.model.LoginResponse;
+import com.practicesoftwaretesting.user.model.RegisterUserRequest;
+import com.practicesoftwaretesting.user.model.RegisterUserResponse;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public abstract class BaseTest {
+
+    public static final String DEFAULT_PASSWORD = "12Example#";
 
     static {
         configureRestAssured();
@@ -29,5 +39,50 @@ public abstract class BaseTest {
                                 .getObjectMapperConfig()
                                 .jackson2ObjectMapperFactory((cls, charset) -> objectMapper)
                 );
+    }
+
+    public void registerUser(String userEmail, String password) {
+        var userController = new UserController();
+        var registerUserRequest = buildUser(userEmail, password);
+        userController.registerUser(registerUserRequest)
+                .as(RegisterUserResponse.class);
+    }
+
+    public String loginUser(String userEmail, String password) {
+        var userController = new UserController();
+        var userLoginResponse = userController.loginUser(new LoginRequest(userEmail, password))
+                .as(LoginResponse.class);
+        assertNotNull(userLoginResponse.getAccessToken());
+        return userLoginResponse.getAccessToken();
+    }
+
+    public String registerAndLoginNewUser() {
+        var userEmail = getUserEmail();
+        registerUser(userEmail, DEFAULT_PASSWORD);
+        return loginUser(userEmail, DEFAULT_PASSWORD);
+    }
+
+    protected RegisterUserRequest buildUser(String email, String password) {
+        return RegisterUserRequest.builder()
+                .firstName("John")
+                .lastName("Lennon")
+                .address("Street 1")
+                .city("City")
+                .state("State")
+                .country("Country")
+                .postcode("1234AA")
+                .phone("0987654321")
+                .dob("1941-01-01")
+                .email(email)
+                .password(password)
+                .build();
+    }
+
+    protected String getUserEmail() {
+        return Faker.instance()
+                .friends()
+                .character()
+                .toLowerCase()
+                .replaceAll(" ", "") + "@gmail.com";
     }
 }

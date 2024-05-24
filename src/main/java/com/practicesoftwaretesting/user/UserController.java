@@ -1,11 +1,11 @@
 package com.practicesoftwaretesting.user;
 
-import com.practicesoftwaretesting.common.BaseClient;
+import com.practicesoftwaretesting.common.BaseController;
 import com.practicesoftwaretesting.user.model.LoginRequest;
 import com.practicesoftwaretesting.user.model.RegisterUserRequest;
 import io.restassured.response.Response;
 
-public class UserController extends BaseClient {
+public class UserController extends BaseController<UserController> {
 
     public Response registerUser(RegisterUserRequest registerUserRequest) {
         return baseClient()

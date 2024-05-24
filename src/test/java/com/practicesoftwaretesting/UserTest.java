@@ -1,10 +1,8 @@
 package com.practicesoftwaretesting;
 
-import com.github.javafaker.Faker;
 import com.practicesoftwaretesting.user.UserController;
 import com.practicesoftwaretesting.user.model.LoginRequest;
 import com.practicesoftwaretesting.user.model.LoginResponse;
-import com.practicesoftwaretesting.user.model.RegisterUserRequest;
 import com.practicesoftwaretesting.user.model.RegisterUserResponse;
 import org.junit.jupiter.api.Test;
 
@@ -37,30 +35,6 @@ public class UserTest extends BaseTest {
         userController.deleteUser(userId, token)
                 .then()
                 .statusCode(204);
-    }
-
-    private String getUserEmail() {
-        return Faker.instance()
-                .friends()
-                .character()
-                .toLowerCase()
-                .replaceAll(" ", "") + "@gmail.com";
-    }
-
-    private RegisterUserRequest buildUser(String email, String password) {
-        return RegisterUserRequest.builder()
-                .firstName("John")
-                .lastName("Lennon")
-                .address("Street 1")
-                .city("City")
-                .state("State")
-                .country("Country")
-                .postcode("1234AA")
-                .phone("0987654321")
-                .dob("1941-01-01")
-                .email(email)
-                .password(password)
-                .build();
     }
 }
 

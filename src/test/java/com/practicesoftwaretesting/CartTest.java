@@ -7,15 +7,23 @@ import com.practicesoftwaretesting.cart.model.CartItem;
 import com.practicesoftwaretesting.cart.model.CreateCartResponse;
 import com.practicesoftwaretesting.cart.model.UpdateCartResponse;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CartTest extends BaseTest {
 
-    private static final String PRODUCT_ID = "01HYGY7EEFTG1EP7Y2Q9N3MXQQ";
+    private static final String PRODUCT_ID = "01HYNEDPPT3YNSSSQK1YV3BG4R";
+
+    private String authToken;
+
+    @BeforeEach
+    void beforeEach() {
+        authToken = registerAndLoginNewUser();
+    }
 
     @Test
     void createUpdateAndDeleteCart() {
-        var cartController = new CartController();
+        var cartController = new CartController().withToken(authToken);
 
         var createdCart = cartController.createCart()
                 .as(CreateCartResponse.class);
