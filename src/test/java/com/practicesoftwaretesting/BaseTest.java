@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.github.javafaker.Faker;
 import com.practicesoftwaretesting.user.UserController;
 import com.practicesoftwaretesting.user.model.LoginRequest;
-import com.practicesoftwaretesting.user.model.LoginResponse;
 import com.practicesoftwaretesting.user.model.RegisterUserRequest;
-import com.practicesoftwaretesting.user.model.RegisterUserResponse;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -45,13 +43,13 @@ public abstract class BaseTest {
         var userController = new UserController();
         var registerUserRequest = buildUser(userEmail, password);
         userController.registerUser(registerUserRequest)
-                .as(RegisterUserResponse.class);
+                .as();
     }
 
     public String loginUser(String userEmail, String password) {
         var userController = new UserController();
         var userLoginResponse = userController.loginUser(new LoginRequest(userEmail, password))
-                .as(LoginResponse.class);
+                .as();
         assertNotNull(userLoginResponse.getAccessToken());
         return userLoginResponse.getAccessToken();
     }
