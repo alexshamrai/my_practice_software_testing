@@ -26,10 +26,9 @@ public class UserController extends BaseController<UserController> {
                 LoginResponse.class);
     }
 
-    public ResponseDecorator<Void> deleteUser(String userId, String token) {
+    public ResponseDecorator<Void> deleteUser(String userId) {
         return new ResponseDecorator<>(
                 baseClient()
-                        .header("Authorization", "Bearer" + token)
                         .delete("users/" + userId),
                 Void.class);
     }

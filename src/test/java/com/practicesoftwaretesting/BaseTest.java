@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public abstract class BaseTest {
 
     public static final String DEFAULT_PASSWORD = "12Example#";
+    private static final String ADMIN_EMAIL = "admin@practicesoftwaretesting.com";
+    private static final String ADMIN_PASSWORD = "welcome01";
 
     static {
         configureRestAssured();
@@ -58,6 +60,10 @@ public abstract class BaseTest {
         var userEmail = getUserEmail();
         registerUser(userEmail, DEFAULT_PASSWORD);
         return loginUser(userEmail, DEFAULT_PASSWORD);
+    }
+
+    public String loginAsAdmin() {
+        return loginUser(ADMIN_EMAIL, ADMIN_PASSWORD);
     }
 
     protected RegisterUserRequest buildUser(String email, String password) {

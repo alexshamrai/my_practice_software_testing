@@ -4,13 +4,21 @@ import com.practicesoftwaretesting.user.assertions.LoginResponseAsserts;
 import com.practicesoftwaretesting.user.assertions.RegisterUserResponseAsserts;
 import com.practicesoftwaretesting.user.UserController;
 import com.practicesoftwaretesting.user.model.LoginRequest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class UserTest extends BaseTest {
 
     private static final String USER_PASSWORD = "12Example#";
-    private static final String ADMIN_EMAIL = "admin@practicesoftwaretesting.com";
-    private static final String ADMIN_PASSWORD = "welcome01";
+
+    UserController userController;
+    String userId;
+
+    @BeforeEach
+    void setUp() {
+        userController = new UserController();
+    }
 
     @Test
     void testUser() {
@@ -29,6 +37,7 @@ public class UserTest extends BaseTest {
                 .postcodeIs(expectedUser.getPostcode())
                 .emailIs(expectedUser.getEmail())
                 .createdAtIsNotNull();
+        userId = user.getId();
 
         var userLoginResponse = userController.loginUser(new LoginRequest(userEmail, USER_PASSWORD))
                 .assertStatusCode(200)
@@ -37,18 +46,12 @@ public class UserTest extends BaseTest {
                 .accessTokenIsNotNull()
                 .tokenTypeIs("bearer")
                 .isNotExpired();
+    }
 
-        var adminLoginResponse = userController.loginUser(new LoginRequest(ADMIN_EMAIL, ADMIN_PASSWORD))
-                .assertStatusCode(200)
-                .as();
-        new LoginResponseAsserts(adminLoginResponse)
-                .accessTokenIsNotNull()
-                .tokenTypeIs("bearer")
-                .isNotExpired();
-
-        var userId = user.getId();
-        var token = adminLoginResponse.getAccessToken();
-        userController.deleteUser(userId, token)
+    @AfterEach
+    void deleteUser() {
+        var token = loginAsAdmin();
+        userController.withToken(token).deleteUser(userId)
                 .assertStatusCode(204);
     }
 }
