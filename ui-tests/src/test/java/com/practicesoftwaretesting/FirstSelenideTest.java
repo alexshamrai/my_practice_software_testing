@@ -16,6 +16,6 @@ public class FirstSelenideTest {
         $(byId("password")).setValue("welcome01");
         $(byClassName("btnSubmit")).click();
         $(byId("menu")).shouldHave(text("Jane Doe"));
-        $(byAttribute("data-test", "page-title")).shouldHave(text("My Account"));
+        $(by("data-test", "page-title")).shouldHave(text("My Account"));
     }
 }
