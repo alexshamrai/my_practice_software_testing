@@ -10,6 +10,7 @@ public class Header {
 
     protected static final By SIGN_IN = byDataTest("nav-sign-in");
     protected static final By PROFILE_MENU = byDataTest("nav-menu");
+    protected static final By CART = byDataTest("nav-cart");
 
     public void clickSignInMenuItem() {
         $(SIGN_IN).click();
@@ -17,5 +18,9 @@ public class Header {
 
     public HeaderAsserts assertThat() {
         return new HeaderAsserts();
+    }
+
+    public void clickCartMenuItem() {
+        $(CART).click();
     }
 }
