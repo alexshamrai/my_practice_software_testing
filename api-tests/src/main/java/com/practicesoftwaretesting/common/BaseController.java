@@ -2,6 +2,7 @@ package com.practicesoftwaretesting.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.practicesoftwaretesting.ConfigReader;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -13,7 +14,7 @@ public abstract class BaseController<T> {
 
     private String authToken;
 
-    public static final String BASE_URI = "https://api.practicesoftwaretesting.com";
+    private final ConfigReader configReader = new ConfigReader();
 
     static {
         configureRestAssured();
@@ -48,7 +49,7 @@ public abstract class BaseController<T> {
 
     protected RequestSpecification baseClient() {
         RequestSpecification requestSpecification = RestAssured.given()
-                .baseUri(BASE_URI)
+                .baseUri(configReader.getProperty("base.api.url"))
                 .contentType(ContentType.JSON);
         if (authToken != null) {
             requestSpecification.header("Authorization", "Bearer" + authToken);
