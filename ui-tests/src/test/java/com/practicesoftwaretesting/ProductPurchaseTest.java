@@ -5,10 +5,9 @@ import com.practicesoftwaretesting.user.UserSteps;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.open;
 import static com.practicesoftwaretesting.user.UserSteps.DEFAULT_PASSWORD;
 
-public class ProductPurchaseTest {
+public class ProductPurchaseTest extends BaseTest {
 
     UserSteps userSteps = new UserSteps();
     LoginPage loginPage = new LoginPage();
@@ -23,16 +22,16 @@ public class ProductPurchaseTest {
         var email = userSteps.getUserEmail();
         userSteps.registerUser(email, DEFAULT_PASSWORD);
 
-        open("https://practicesoftwaretesting.com/#/auth/login");
-        loginPage.login(email, DEFAULT_PASSWORD);
+        loginPage.open()
+                .login(email, DEFAULT_PASSWORD);
         accountPage.isLoaded();
 
     }
 
     @Test
     void addProductToCartAndPurchaseIt() {
-        open("https://practicesoftwaretesting.com/#/");
-        homePage.isLoaded()
+        homePage.open()
+                .isLoaded()
                 .clickOnTheFirstProduct();
 
         productPage.isLoaded()
