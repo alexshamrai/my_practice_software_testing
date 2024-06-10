@@ -4,9 +4,7 @@ import com.practicesoftwaretesting.pages.*;
 import com.practicesoftwaretesting.user.model.RegisterUserRequest;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.open;
-
-public class UserTest {
+public class UserTest extends BaseTest {
 
     HomePage homePage = new HomePage();
     Header header = new Header();
@@ -16,8 +14,8 @@ public class UserTest {
 
     @Test
     public void registerNewUserAndLogin() {
-        open("https://practicesoftwaretesting.com/");
-        homePage.isLoaded();
+        homePage.open()
+                .isLoaded();
 
         header.clickSignInMenuItem();
         loginPage.isLoaded()
