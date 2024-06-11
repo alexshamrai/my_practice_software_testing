@@ -25,7 +25,6 @@ public class ProductPurchaseTest extends BaseTest {
         loginPage.open()
                 .login(email, DEFAULT_PASSWORD);
         accountPage.isLoaded();
-
     }
 
     @Test
