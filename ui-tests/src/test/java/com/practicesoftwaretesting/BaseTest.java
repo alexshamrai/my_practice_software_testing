@@ -8,11 +8,13 @@ import org.junit.jupiter.api.AfterEach;
 
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.practicesoftwaretesting.user.UserSteps.DEFAULT_PASSWORD;
 
 public abstract class BaseTest {
 
     static ConfigReader configReader = new ConfigReader();
+    static String defaultPassword = configReader.getProperty("default.password");
+    static String adminEmail = configReader.getProperty("admin.email");
+    static String adminPassword = configReader.getProperty("admin.password");
 
     UserSteps userSteps = new UserSteps();
     LoginPage loginPage = new LoginPage();
@@ -36,16 +38,16 @@ public abstract class BaseTest {
 
     public void registerAndLoginAsNewUser() {
         var email = userSteps.getUserEmail();
-        userSteps.registerUser(email, DEFAULT_PASSWORD);
+        userSteps.registerUser(email, defaultPassword);
 
         loginPage.open()
-                .login(email, DEFAULT_PASSWORD);
+                .login(email, defaultPassword);
         accountPage.isLoaded();
     }
 
     public void loginAsAdmin() {
         loginPage.open()
-                .login(UserSteps.ADMIN_EMAIL, UserSteps.ADMIN_PASSWORD);
+                .login(adminEmail, adminPassword);
         accountPage.isLoaded();
     }
 

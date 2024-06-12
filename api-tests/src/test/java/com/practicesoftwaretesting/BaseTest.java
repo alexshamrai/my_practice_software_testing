@@ -3,10 +3,13 @@ package com.practicesoftwaretesting;
 import com.practicesoftwaretesting.user.UserSteps;
 import com.practicesoftwaretesting.user.model.RegisterUserRequest;
 
-import static com.practicesoftwaretesting.user.UserSteps.ADMIN_EMAIL;
-import static com.practicesoftwaretesting.user.UserSteps.ADMIN_PASSWORD;
 
 public abstract class BaseTest {
+
+    static ConfigReader configReader = new ConfigReader();
+    static String defaultPassword = configReader.getProperty("default.password");
+    static String adminEmail = configReader.getProperty("admin.email");
+    static String adminPassword = configReader.getProperty("admin.password");
 
     UserSteps userSteps = new UserSteps();
 
@@ -23,7 +26,7 @@ public abstract class BaseTest {
     }
 
     public String loginAsAdmin() {
-        return loginUser(ADMIN_EMAIL, ADMIN_PASSWORD);
+        return loginUser(adminEmail, adminPassword);
     }
 
     protected RegisterUserRequest buildUser(String email, String password) {

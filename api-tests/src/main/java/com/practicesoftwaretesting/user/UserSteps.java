@@ -1,6 +1,7 @@
 package com.practicesoftwaretesting.user;
 
 import com.github.javafaker.Faker;
+import com.practicesoftwaretesting.ConfigReader;
 import com.practicesoftwaretesting.user.model.LoginRequest;
 import com.practicesoftwaretesting.user.model.RegisterUserRequest;
 
@@ -8,9 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UserSteps {
 
-    public static final String DEFAULT_PASSWORD = "12Example#";
-    public static final String ADMIN_EMAIL = "admin@practicesoftwaretesting.com";
-    public static final String ADMIN_PASSWORD = "welcome01";
+    ConfigReader config = new ConfigReader();
 
     public void registerUser(String userEmail, String password) {
         var userController = new UserController();
@@ -29,12 +28,13 @@ public class UserSteps {
 
     public String registerAndLoginNewUser() {
         var userEmail = getUserEmail();
-        registerUser(userEmail, DEFAULT_PASSWORD);
-        return loginUser(userEmail, DEFAULT_PASSWORD);
+        String password = config.getProperty("default.password");
+        registerUser(userEmail, password);
+        return loginUser(userEmail, password);
     }
 
     public String loginAsAdmin() {
-        return loginUser(ADMIN_EMAIL, ADMIN_PASSWORD);
+        return loginUser(config.getProperty("admin.email"), config.getProperty("admin.password"));
     }
 
     public RegisterUserRequest buildUser(String email, String password) {
