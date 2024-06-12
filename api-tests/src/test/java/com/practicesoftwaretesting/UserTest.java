@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 
 public class UserTest extends BaseTest {
 
-    private static final String USER_PASSWORD = "12Example#";
-
     UserController userController;
     String userId;
 
@@ -24,7 +22,7 @@ public class UserTest extends BaseTest {
     void testUser() {
         var userController = new UserController();
         var userEmail = getUserEmail();
-        var expectedUser = buildUser(userEmail, USER_PASSWORD);
+        var expectedUser = buildUser(userEmail, defaultPassword);
         var user = userController.registerUser(expectedUser)
                 .assertStatusCode(201)
                 .as();
@@ -39,7 +37,7 @@ public class UserTest extends BaseTest {
                 .createdAtIsNotNull();
         userId = user.getId();
 
-        var userLoginResponse = userController.loginUser(new LoginRequest(userEmail, USER_PASSWORD))
+        var userLoginResponse = userController.loginUser(new LoginRequest(userEmail, defaultPassword))
                 .assertStatusCode(200)
                 .as();
         new LoginResponseAsserts(userLoginResponse)
