@@ -11,11 +11,11 @@ public class UserSteps {
 
     ConfigReader config = new ConfigReader();
 
-    public void registerUser(String userEmail, String password) {
+    public String registerUser(String userEmail, String password) {
         var userController = new UserController();
         var registerUserRequest = buildUser(userEmail, password);
-        userController.registerUser(registerUserRequest)
-                .as();
+        return userController.registerUser(registerUserRequest)
+                .as().getId();
     }
 
     public String loginUser(String userEmail, String password) {
@@ -26,18 +26,14 @@ public class UserSteps {
         return userLoginResponse.getAccessToken();
     }
 
-    public String registerAndLoginNewUser() {
-        var userEmail = getUserEmail();
-        String password = config.getProperty("default.password");
-        registerUser(userEmail, password);
-        return loginUser(userEmail, password);
+
+    public void deleteUser(String userId) {
+        var token = loginUser(config.getProperty("admin.email"), config.getProperty("admin.password"));
+        new UserController().withToken(token).deleteUser(userId)
+                .assertStatusCode(204);
     }
 
-    public String loginAsAdmin() {
-        return loginUser(config.getProperty("admin.email"), config.getProperty("admin.password"));
-    }
-
-    public RegisterUserRequest buildUser(String email, String password) {
+    public static RegisterUserRequest buildUser(String email, String password) {
         return RegisterUserRequest.builder()
                 .firstName("John")
                 .lastName("Lennon")
@@ -53,7 +49,7 @@ public class UserSteps {
                 .build();
     }
 
-    public String getUserEmail() {
+    public static String generateUserEmail() {
         return Faker.instance()
                 .friends()
                 .character()
