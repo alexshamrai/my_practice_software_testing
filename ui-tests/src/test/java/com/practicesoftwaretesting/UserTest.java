@@ -2,6 +2,7 @@ package com.practicesoftwaretesting;
 
 import com.practicesoftwaretesting.pages.*;
 import com.practicesoftwaretesting.user.model.RegisterUserRequest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class UserTest extends BaseTest {
@@ -11,6 +12,7 @@ public class UserTest extends BaseTest {
     LoginPage loginPage = new LoginPage();
     RegisterPage registerPage = new RegisterPage();
     AccountPage accountPage = new AccountPage();
+    RegisterUserRequest user = getUser();
 
     @Test
     public void registerNewUserAndLogin() {
@@ -25,7 +27,6 @@ public class UserTest extends BaseTest {
                 .assertThat()
                 .hasCorrectInfo();
 
-        var user = getUser();
         registerPage.registerNewUser(user);
 
         loginPage.isLoaded()
@@ -37,7 +38,13 @@ public class UserTest extends BaseTest {
                 .isSignedIn(fullUserName);
     }
 
-    private static RegisterUserRequest getUser() {
+    @AfterEach
+    void cleanup() {
+        var users = searchUsers(user.getLastName());
+        users.getData().forEach(userToDelete -> deleteUser(userToDelete.getId()));
+    }
+
+    private RegisterUserRequest getUser() {
         return RegisterUserRequest.builder()
                 .firstName("George")
                 .lastName("Harrison")

@@ -2,10 +2,7 @@ package com.practicesoftwaretesting.user;
 
 import com.practicesoftwaretesting.common.BaseController;
 import com.practicesoftwaretesting.common.ResponseDecorator;
-import com.practicesoftwaretesting.user.model.LoginRequest;
-import com.practicesoftwaretesting.user.model.LoginResponse;
-import com.practicesoftwaretesting.user.model.RegisterUserRequest;
-import com.practicesoftwaretesting.user.model.RegisterUserResponse;
+import com.practicesoftwaretesting.user.model.*;
 
 public class UserController extends BaseController<UserController> {
 
@@ -31,5 +28,12 @@ public class UserController extends BaseController<UserController> {
                 baseClient()
                         .delete("users/" + userId),
                 Void.class);
+    }
+
+    public ResponseDecorator<UsersSearch> searchUsers(String queryPhrase) {
+        return new ResponseDecorator<>(
+                baseClient()
+                        .get("users/search?q=" + queryPhrase),
+               UsersSearch.class);
     }
 }

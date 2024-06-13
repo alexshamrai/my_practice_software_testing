@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.practicesoftwaretesting.pages.AccountPage;
 import com.practicesoftwaretesting.pages.LoginPage;
 import com.practicesoftwaretesting.user.UserSteps;
+import com.practicesoftwaretesting.user.model.UsersSearch;
 import org.junit.jupiter.api.AfterEach;
 
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
@@ -54,6 +55,10 @@ public abstract class BaseTest {
 
     public void deleteUser(String userId) {
         userSteps.deleteUser(userId);
+    }
+
+    public UsersSearch searchUsers(String queryPhrase) {
+        return userSteps.searchUsers(queryPhrase);
     }
 
 }
