@@ -8,6 +8,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.practicesoftwaretesting.user.UserSteps.buildUser;
+import static com.practicesoftwaretesting.user.UserSteps.generateUserEmail;
+
 public class UserTest extends BaseTest {
 
     UserController userController;
@@ -21,7 +24,7 @@ public class UserTest extends BaseTest {
     @Test
     void testUser() {
         var userController = new UserController();
-        var userEmail = getUserEmail();
+        var userEmail = generateUserEmail();
         var expectedUser = buildUser(userEmail, defaultPassword);
         var user = userController.registerUser(expectedUser)
                 .assertStatusCode(201)

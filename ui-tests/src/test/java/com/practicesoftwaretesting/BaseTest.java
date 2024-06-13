@@ -36,13 +36,8 @@ public abstract class BaseTest {
         closeWebDriver();
     }
 
-    public void registerAndLoginAsNewUser() {
-        var email = userSteps.getUserEmail();
-        userSteps.registerUser(email, defaultPassword);
-
-        loginPage.open()
-                .login(email, defaultPassword);
-        accountPage.isLoaded();
+    public String registerUser(String email) {
+        return userSteps.registerUser(email, defaultPassword);
     }
 
     public void loginAsAdmin() {
@@ -55,6 +50,10 @@ public abstract class BaseTest {
         loginPage.open()
                 .login(email, password);
         accountPage.isLoaded();
+    }
+
+    public void deleteUser(String userId) {
+        userSteps.deleteUser(userId);
     }
 
 }
