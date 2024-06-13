@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.practicesoftwaretesting.ConfigReader;
 import com.practicesoftwaretesting.user.model.LoginRequest;
 import com.practicesoftwaretesting.user.model.RegisterUserRequest;
+import com.practicesoftwaretesting.user.model.UsersSearch;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -28,9 +29,19 @@ public class UserSteps {
 
 
     public void deleteUser(String userId) {
-        var token = loginUser(config.getProperty("admin.email"), config.getProperty("admin.password"));
+        var token = getAdminToken();
         new UserController().withToken(token).deleteUser(userId)
                 .assertStatusCode(204);
+    }
+
+    public UsersSearch searchUsers(String queryPhrase) {
+        var token = getAdminToken();
+        return new UserController().withToken(token).searchUsers(queryPhrase)
+                .as();
+    }
+
+    private String getAdminToken() {
+        return loginUser(config.getProperty("admin.email"), config.getProperty("admin.password"));
     }
 
     public static RegisterUserRequest buildUser(String email, String password) {
