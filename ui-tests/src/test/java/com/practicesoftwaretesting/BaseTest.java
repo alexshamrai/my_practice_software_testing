@@ -61,4 +61,8 @@ public abstract class BaseTest {
         return userSteps.searchUsers(queryPhrase);
     }
 
+    public String getLoginToken(String email, String password) {
+        return userSteps.loginUser(email, password);
+    }
+
 }

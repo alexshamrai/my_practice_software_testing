@@ -42,6 +42,10 @@
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide-proxy</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
