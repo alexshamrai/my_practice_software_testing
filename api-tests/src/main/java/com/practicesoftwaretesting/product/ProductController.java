@@ -5,9 +5,11 @@ import com.practicesoftwaretesting.common.ResponseDecorator;
 import com.practicesoftwaretesting.product.model.ProductsResponse;
 
 import com.practicesoftwaretesting.product.model.ProductsRequest;
+import io.qameta.allure.Step;
 
 public class ProductController extends BaseController<ProductController> {
 
+    @Step("Get products")
     public ResponseDecorator<ProductsResponse> getProducts(ProductsRequest productsRequest) {
         return new ResponseDecorator<>(
                 baseClient()

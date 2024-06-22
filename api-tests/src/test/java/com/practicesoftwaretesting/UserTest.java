@@ -6,6 +6,7 @@ import com.practicesoftwaretesting.user.UserController;
 import com.practicesoftwaretesting.user.model.LoginRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.practicesoftwaretesting.user.UserSteps.buildUser;
@@ -22,6 +23,7 @@ public class UserTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Register and login user")
     void testUser() {
         var userController = new UserController();
         var userEmail = generateUserEmail();

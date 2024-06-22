@@ -5,10 +5,7 @@ import com.practicesoftwaretesting.cart.model.AddCartItemRequest;
 import com.practicesoftwaretesting.cart.model.CartItem;
 import com.practicesoftwaretesting.product.ProductController;
 import com.practicesoftwaretesting.product.model.ProductsRequest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static com.practicesoftwaretesting.user.UserSteps.generateUserEmail;
 
@@ -35,6 +32,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Create, update and delete cart")
     void createUpdateAndDeleteCart() {
         var cartController = new CartController().withToken(authToken);
 
