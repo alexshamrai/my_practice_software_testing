@@ -5,6 +5,8 @@ import com.practicesoftwaretesting.user.model.RegisterUserRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import static com.practicesoftwaretesting.user.UserSteps.generateUserEmail;
+
 public class UserTest extends BaseTest {
 
     HomePage homePage = new HomePage();
@@ -55,7 +57,7 @@ public class UserTest extends BaseTest {
                 .postcode("12345")
                 .phone("1234567890")
                 .dob("01/01/2000")
-                .email("georgeharrison@gmail.com")
+                .email(generateUserEmail())
                 .password("12Example#")
                 .build();
     }
