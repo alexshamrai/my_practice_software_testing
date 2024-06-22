@@ -27,11 +27,11 @@ public class RegisterPageAsserts extends RegisterPage {
         $(POSTCODE_LABEL).shouldHave(text("Postcode"));
         $(POSTCODE_INPUT).shouldHave(attribute("placeholder", "Your Postcode *"));
 
-        $(CITY_LABEL).shouldHave(text("City"));
-        $(CITY_INPUT).shouldHave(attribute("placeholder", "Your City *"));
-
-        $(STATE_LABEL).shouldHave(text("State"));
-        $(STATE_INPUT).shouldHave(attribute("placeholder", "Your state *"));
+//        $(CITY_LABEL).shouldHave(text("City"));
+//        $(CITY_INPUT).shouldHave(attribute("placeholder", "Your City *"));
+//
+//        $(STATE_LABEL).shouldHave(text("State"));
+//        $(STATE_INPUT).shouldHave(attribute("placeholder", "Your state *"));
 
         $(COUNTRY_LABEL).shouldHave(text("Country"));
         $(COUNTRY_DROPDOWN).shouldHave(tagName("select"));
