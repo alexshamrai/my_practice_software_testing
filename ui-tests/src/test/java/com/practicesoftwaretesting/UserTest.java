@@ -3,6 +3,8 @@ package com.practicesoftwaretesting;
 import com.practicesoftwaretesting.pages.*;
 import com.practicesoftwaretesting.user.model.RegisterUserRequest;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.practicesoftwaretesting.user.UserSteps.generateUserEmail;
@@ -17,6 +19,8 @@ public class UserTest extends BaseTest {
     RegisterUserRequest user = getUser();
 
     @Test
+    @Tag("Smoke")
+    @DisplayName("Register new user and login")
     public void registerNewUserAndLogin() {
         homePage.open()
                 .isLoaded();
