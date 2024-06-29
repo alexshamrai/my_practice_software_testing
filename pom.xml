@@ -28,6 +28,7 @@
         <slf4j.version>2.0.13</slf4j.version>
         <allure.version>2.26.0</allure.version>
         <aspectj.version>1.9.22</aspectj.version>
+        <test.tags></test.tags>
     </properties>
 
     <dependencyManagement>
@@ -109,6 +110,7 @@
                         -Dfile.encoding=${project.build.sourceEncoding}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                    <groups>${test.tags}</groups>
                 </configuration>
                 <dependencies>
                     <dependency>

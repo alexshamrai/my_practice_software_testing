@@ -4,10 +4,7 @@ import com.practicesoftwaretesting.user.assertions.LoginResponseAsserts;
 import com.practicesoftwaretesting.user.assertions.RegisterUserResponseAsserts;
 import com.practicesoftwaretesting.user.UserController;
 import com.practicesoftwaretesting.user.model.LoginRequest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static com.practicesoftwaretesting.user.UserSteps.buildUser;
 import static com.practicesoftwaretesting.user.UserSteps.generateUserEmail;
@@ -23,6 +20,7 @@ public class UserTest extends BaseTest {
     }
 
     @Test
+    @Tag("Smoke")
     @DisplayName("Register and login user")
     void testUser() {
         var userController = new UserController();
