@@ -19,5 +19,21 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'maven'
-      - name: Build with Maven
-        run:  mvn clean test -Dgroups="Smoke"
+      - name: Install dependencies
+        run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - name: Run Tests
+        run: mvn clean test -Dgroups="Smoke" -pl api-tests
+
+      - name: Generate Allure report
+        uses: simple-elf/allure-report-action@v1.7
+        with:
+          gh_pages: gh-pages
+          allure_results: api-tests/target/allure-results
+          allure_report: api-tests/target/allure-report
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./api-tests/target/allure-report
