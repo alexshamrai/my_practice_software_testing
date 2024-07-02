@@ -1,5 +1,1 @@
-{
-  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
-  "children" : [ ],
-  "name" : "timeline"
-}
+{"uid":"ab17fc5a4eb3bca4b216b548c7f9fcbc","children":[{"name":"fv-az979-596","children":[{"name":"2204@fv-az979-596.main(1)","children":[{"name":"Register and login user","uid":"b4bc58fd972520c2","parentUid":"2c216e4e0e91ccc3d1f38aab7e8fb360","status":"passed","time":{"start":1719914990764,"stop":1719914999161,"duration":8397},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":["Smoke"]}],"uid":"2c216e4e0e91ccc3d1f38aab7e8fb360"}],"uid":"62fb48006e65eaa55c9d40b68b0bfea9"}],"name":"timeline"}

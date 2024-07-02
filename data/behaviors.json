@@ -1,5 +1,1 @@
-{
-  "uid" : "b1a8273437954620fa374b796ffaacdd",
-  "children" : [ ],
-  "name" : "behaviors"
-}
+{"uid":"b1a8273437954620fa374b796ffaacdd","children":[{"name":"Register and login user","uid":"b4bc58fd972520c2","parentUid":"b1a8273437954620fa374b796ffaacdd","status":"passed","time":{"start":1719914990764,"stop":1719914999161,"duration":8397},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":["Smoke"]}],"name":"behaviors"}
