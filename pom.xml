@@ -28,6 +28,7 @@
         <slf4j.version>2.0.13</slf4j.version>
         <allure.version>2.27.0</allure.version>
         <aspectj.version>1.9.22</aspectj.version>
+        <playwright.version>1.45.0</playwright.version>
         <test.tags></test.tags>
     </properties>
 
@@ -94,6 +95,11 @@
                 <version>${allure.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.playwright</groupId>
+                <artifactId>playwright</artifactId>
+                <version>1.45.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
