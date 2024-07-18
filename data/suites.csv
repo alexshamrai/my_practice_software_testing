@@ -1,2 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Jul 02 12:58:34 GMT 2024","Tue Jul 02 12:58:41 GMT 2024","6697","","com.practicesoftwaretesting.UserTest","","com.practicesoftwaretesting.UserTest","testUser","Register and login user",""
+"passed","Thu Jul 18 15:21:10 GMT 2024","Thu Jul 18 15:21:17 GMT 2024","6873","","com.practicesoftwaretesting.UserTest","","com.practicesoftwaretesting.UserTest","testUser","Register and login user",""
